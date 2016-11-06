@@ -1,8 +1,8 @@
 ﻿{
   "dependencies": {
     "GitInfo": "1.1.27",
-    "Microsoft.VisualStudio.SDK.VsixSuppression": "14.1.25",
-    "Microsoft.VSSDK.BuildTools": "14.3.25420",
+    "Microsoft.VisualStudio.SDK.VsixSuppression": "14.1.32",
+    "Microsoft.VSSDK.BuildTools": "15.0.25901-RC",
     "MSBuilder.ThisAssembly.Project": "0.2.4",
     "MSBuilder.ThisAssembly.Vsix": "0.1.1",
     "netfx-System.StringResources": "3.0.13",
