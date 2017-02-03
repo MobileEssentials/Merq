@@ -8,7 +8,7 @@
 	</ItemGroup>
 
 	<Target Name="GetVersion" DependsOnTargets="GitVersion" Returns="$(Version)">
-		<PropertyGroup>
+		<PropertyGroup Condition="'$(Version)' == ''">
 			<GitSemVerDashLabel Condition="'$(GitBranch)' == 'undefined'">-pr</GitSemVerDashLabel>
 			<GitSemVerDashLabel Condition="'$(APPVEYOR_PULL_REQUEST_NUMBER)' != ''">-pr$(APPVEYOR_PULL_REQUEST_NUMBER)</GitSemVerDashLabel>
 			<Version>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)$(GitSemVerDashLabel)</Version>
