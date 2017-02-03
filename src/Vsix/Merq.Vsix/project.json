@@ -2,8 +2,8 @@
   "dependencies": {
     "GitInfo": "1.1.35",
     "Microsoft.VisualStudio.SDK.VsixSuppression": "14.1.32",
-    "Clarius.VisualStudio": "2.0.12",
     "Microsoft.VSSDK.BuildTools": "15.0.26124-rc3",
+    "Clarius.VisualStudio": "2.0.12",
     "MSBuilder.ThisAssembly.Project": "0.3.1",
     "netfx-System.StringResources": "3.0.14",
     "VSSDK.ComponentModelHost.11": "11.0.4",
