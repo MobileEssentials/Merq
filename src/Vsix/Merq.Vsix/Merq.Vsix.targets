@@ -4,9 +4,15 @@
 	<Import Project="Merq.Vsix.BindingRedirects.targets" />
 
 	<Target Name="GetVersion" DependsOnTargets="GitVersion" Returns="$(Version)">
-		<PropertyGroup>
+		<PropertyGroup Condition="'$(Version)' == ''">
 			<Version>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)</Version>
 		</PropertyGroup>
 	</Target>
 
+	<Target Name="GetIsExperimental" Returns="$(IsExperimental)">
+		<PropertyGroup>
+			<IsExperimental>true</IsExperimental>
+			<IsExperimental Condition="'$(IsProductComponent)' == 'true'">false</IsExperimental>
+		</PropertyGroup>
+	</Target>
 </Project>

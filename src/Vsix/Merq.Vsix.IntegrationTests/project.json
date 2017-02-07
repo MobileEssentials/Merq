@@ -3,7 +3,7 @@
     "GitInfo": "1.1.35",
     "Microsoft.Reactive.Testing": "3.0.0",
     "Microsoft.VisualStudio.Shell.Interop.12.0": "12.0.30110",
-    "Microsoft.VSSDK.BuildTools": "14.3.25420",
+    "Microsoft.VSSDK.BuildTools": "15.0.26124-rc3",
     "Moq": "4.5.10",
     "MSBuilder.ThisAssembly.Project": "0.3.1",
     "System.Reactive": "3.0.0",
