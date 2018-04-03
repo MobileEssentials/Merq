@@ -5,7 +5,7 @@
 
 	<Import Project="$(VsSDKInstall)\Microsoft.VsSDK.targets" Condition="'$(VsSDKVersion)' == '' And Exists('$(VsSDKInstall)\Microsoft.VsSDK.targets')" />
 
-	<Target Name="GetVersion" DependsOnTargets="GitVersion" Returns="$(Version)">
+	<Target Name="GetVsixVersion" DependsOnTargets="GitVersion" Returns="$(Version)">
 		<PropertyGroup Condition="'$(Version)' == ''">
 			<Version>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)</Version>
 		</PropertyGroup>
@@ -16,6 +16,12 @@
 		<CompareBuildTaskVersion
 		  TargetsAssemblyPath="$(MSBuildThisFileDirectory)$(VsSDKAssemblyFile)">
 		</CompareBuildTaskVersion>
+	</Target>
+
+	<Target Name="AppendVsixVersionToTargetVsixContainer" BeforeTargets="CreateVsixContainer" DependsOnTargets="GetVsixVersion">
+		<PropertyGroup>
+			<TargetVsixContainer>$([System.IO.Path]::ChangeExtension('$(TargetVsixContainer)', '$(Version).vsix'))</TargetVsixContainer>
+		</PropertyGroup>
 	</Target>
 
 </Project>
