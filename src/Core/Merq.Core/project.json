@@ -6,7 +6,6 @@
     "Microsoft.CSharp": "4.0.1",
     "MSBuilder.ThisAssembly.Project": "0.3.3",
     "netfx-System.StringResources": "3.0.14",
-    "System.Reactive": "3.0.0",
     "System.Runtime": "4.3.0",
     "System.Threading.Tasks": "4.3.0"
   },
