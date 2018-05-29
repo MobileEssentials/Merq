@@ -48,7 +48,7 @@
 
   <Target Name="AddPackageContents" BeforeTargets="GetPackageContents">
     <ItemGroup>
-      <PackageFile Include="$(OutputPath)\$(PackageId).*" Exclude="$(OutputPath)\$(PackageId)*.json" Kind="Lib" />
+      <PackageFile Include="$(OutputPath)\$(PackageId).*" Exclude="$(OutputPath)\$(PackageId)*.nupkg;$(OutputPath)\$(PackageId)*.json" Kind="Lib" />
     </ItemGroup>
   </Target>
 

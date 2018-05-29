@@ -24,6 +24,8 @@
 
 		<GitInfoReportImportance>low</GitInfoReportImportance>
 		<GitSkipCache>true</GitSkipCache>
+		<SkipReadGitCache>true</SkipReadGitCache>
+		<SkipWriteGitCache>true</SkipWriteGitCache>
 		<GitIgnoreTagVersion>true</GitIgnoreTagVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
