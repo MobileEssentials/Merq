@@ -23,7 +23,7 @@
 		</CompareBuildTaskVersion>
 	</Target>
 
-	<Target Name="AppendVsixVersionToTargetVsixContainer" BeforeTargets="CreateVsixContainer" DependsOnTargets="GetVsixVersion">
+	<Target Name="AppendVsixVersionToTargetVsixContainer" BeforeTargets="CreateVsixContainer" DependsOnTargets="GetVersion">
 		<PropertyGroup>
 			<TargetVsixContainerName>$([System.IO.Path]::ChangeExtension('$(TargetVsixContainerName)', '$(VersionPrefix).vsix'))</TargetVsixContainerName>
 			<TargetVsixContainer Condition="'$(Out)' != ''">$([System.IO.Path]::Combine('$(PackageOutputPath)', '$(TargetVsixContainerName)'))</TargetVsixContainer>
