@@ -79,11 +79,6 @@
 		<MSBuild Projects="src\Merq.VisualStudio.proj" Targets="Pack" Properties="$(CommonBuildProperties)" />
 		<MSBuild Projects="src\Core\Merq\Merq.csproj" Targets="Pack" Properties="$(CommonBuildProperties)" />
 		<MSBuild Projects="src\Async\Merq.Async\Merq.Async.csproj" Targets="Pack" Properties="$(CommonBuildProperties)" />
-
-		<Copy SourceFiles="src\Vsix\Merq.Vsix\bin\$(Configuration)\Microsoft.VisualStudio.Xamarin.Merq.json"
-			  Condition="Exists('src\Vsix\Merq.Vsix\bin\$(Configuration)\Microsoft.VisualStudio.Xamarin.Merq.json')"
-			  DestinationFolder="$(Out)"
-			  SkipUnchangedFiles="true" />
 	</Target>
 
 	<Import Project="$(PackagesPath)\MSBuilder.CodeTaskAssembly\build\MSBuilder.CodeTaskAssembly.props"
