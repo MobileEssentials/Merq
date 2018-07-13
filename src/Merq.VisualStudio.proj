@@ -32,8 +32,8 @@
 		<PackageLicenseUrl>https://raw.github.com/MobileEssentials/Merq/master/LICENSE</PackageLicenseUrl>
 		<PackageIconUrl>https://raw.github.com/MobileEssentials/Merq/master/icon/48.png</PackageIconUrl>
 
-		<Out Condition="'$(Out)' == ''">..\out</Out>
 		<PackageOutputPath>$(Out)</PackageOutputPath>
+		<PackageOutputPath Condition="'$(PackageOutputPath)' == ''">..\out</PackageOutputPath>
 		<NuGetRepo Condition="'$(NuGetRepo)' == ''">https://www.myget.org/F/xvs/api/v2/package</NuGetRepo>
 		<NuGetUrl Condition="'$(NuGetUrl)' == ''">https://dist.nuget.org/win-x86-commandline/latest/nuget.exe</NuGetUrl>
 		<NuGet Condition="'$(NuGet)' == ''">$(RestoreOutputPath)\nuget.exe</NuGet>
@@ -46,7 +46,10 @@
 		<PackageFile Include="Installers\build\*.*">
 			<Kind>build</Kind>
 		</PackageFile>
-		<PackageFile Include="Vsix\Merq.Vsix\bin\$(Configuration)\Merq*.vsix">
+		<PackageFile Condition="'$(Out)' == ''" Include="Vsix\Merq.Vsix\bin\$(Configuration)\Merq*.vsix">
+			<Kind>tools</Kind>
+		</PackageFile>
+		<PackageFile Condition="'$(Out)' != ''" Include="$(Out)\Merq*.vsix">
 			<Kind>tools</Kind>
 		</PackageFile>
 		<PackageFile Include="Vsix\Merq.Vsix\bin\$(Configuration)\extension.vsixmanifest">
