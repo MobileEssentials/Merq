@@ -33,5 +33,11 @@
     <ProjectReference Include="..\Merq.Vsix\Merq.Vsix.csproj" />
   </ItemGroup>
 
+  <Target Name="RemoveResolvedLockFileAnalyzers" AfterTargets="ResolveLockFileAnalyzers">
+    <ItemGroup>
+      <Analyzer Remove="@(ResolvedAnalyzers)" />
+    </ItemGroup>
+  </Target>
+
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Merq.targets', '$(MSBuildThisFileDirectory)'))" />
 </Project>
