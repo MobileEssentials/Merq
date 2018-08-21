@@ -29,7 +29,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GitInfo" Version="1.1.48" />
+    <PackageReference Include="GitInfo" Version="2.0.11" />
     <PackageReference Include="IFluentInterface" Version="2.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Threading" Version="14.1.114" />
     <PackageReference Include="MSBuilder.ThisAssembly.Project" Version="0.3.3" />
