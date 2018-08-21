@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitInfo" Version="2.*" PrivateAssets="all" />
+    <PackageReference Include="GitInfo" Version="2.0.11" PrivateAssets="all" />
     <PackageReference Include="MSBuilder" Version="*" PrivateAssets="all" />
     <PackageReference Include="MSBuilder.ThisAssembly.Project" Version="0.3.3" PrivateAssets="all" />
     <PackageReference Include="Microsoft.VisualStudio.Shell.Interop.12.0" Version="12.0.30110" />

@@ -8,8 +8,8 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Merq.props', '$(MSBuildThisFileDirectory)'))" />
 
   <ItemGroup>
-    <PackageReference Include="GitInfo" Version="2.*" PrivateAssets="all" />
-    <PackageReference Include="IFluentInterface" Version="2.*" PrivateAssets="all" />
+    <PackageReference Include="GitInfo" Version="2.0.11" PrivateAssets="all" />
+    <PackageReference Include="IFluentInterface" Version="2.1.0" PrivateAssets="all" />
     <PackageReference Include="MSBuilder.ThisAssembly.Project" Version="0.3.3" PrivateAssets="all" />
     <PackageReference Include="System.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
