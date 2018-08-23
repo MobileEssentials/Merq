@@ -20,5 +20,4 @@
     <ProjectReference Include="..\Merq.Async\Merq.Async.csproj" />
   </ItemGroup>
 
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Merq.targets', '$(MSBuildThisFileDirectory)'))" />
 </Project>

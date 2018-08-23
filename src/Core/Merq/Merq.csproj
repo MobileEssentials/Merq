@@ -28,5 +28,4 @@
 		</PropertyGroup>
 	</Target>
 	
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Merq.targets))\Merq.targets" />
 </Project>
