@@ -97,5 +97,5 @@
 		</ItemGroup>
 	</Target>
 	
-	<Import Project="src\Merq.targets" />
+	<Import Project="src\Directory.Build.targets" />
 </Project>
