@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <Import Project="Merq.Vsix.props" />
-  
+
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -38,7 +38,7 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
   </ItemGroup>
-  
+
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
@@ -67,21 +67,86 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudioEng.MicroBuild.Core" Version="1.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="15.9.3039">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MSBuilder.ThisAssembly.Project" Version="0.3.3" PrivateAssets="all" />
     <PackageReference Include="netfx-System.StringResources" Version="3.0.14" PrivateAssets="all" />
     <PackageReference Include="Clarius.VisualStudio" Version="2.0.12" />
-    <PackageReference Include="Xamarin.VSSDK" Version="0.3.0-alpha.17" />
-    <PackageReference Include="Xamarin.VsSDK.BuildTools" Version="0.3.0-alpha.17" />
+    <PackageReference Include="Xamarin.VSSDK" Version="0.4.0-alpha.24" />
+    <PackageReference Include="Xamarin.VSSDK.BuildTools" Version="0.4.0-alpha.24" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.1.4054" />
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.1.32210.191" />
     <PackageReference Include="Microsoft.VisualStudio.SDK.EmbedInteropTypes" Version="15.0.36" ExcludeAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <BindingRedirect Include="Merq" From="0.0.0.0" To="99.9.9.9" />
-    <BindingRedirect Include="Merq.Core" From="0.0.0.0" To="99.9.9.9" />
+    <BindingRedirect Include="Merq" />
+    <BindingRedirect Include="Merq.Core" />
   </ItemGroup>
-  
+
+  <!--
+    See https://github.com/xamarin/UITools/pull/705/commits/4a65bea18148f7ac2ecd34419450eda3550a776a by Thomas Sparks
+
+    TL;DR: ValidateVsixReferencedAssemblies locks the file, preventing Signing from succeeding
+  -->
+  <Target Name="TempRemoveVsixSourceItems" BeforeTargets="ValidateVsixReferencedAssemblies">
+    <ItemGroup>
+      <VSIXSourceItem Remove="$(IntermediateOutputPath)Merq.Vsix.dll"/>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="ReturnVsixSourceItems" AfterTargets="ValidateVsixReferencedAssemblies">
+    <ItemGroup>
+      <VSIXSourceItem Include="$(IntermediateOutputPath)Merq.Vsix.dll"/>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="GetFilesToSign" BeforeTargets="SignVsixContentFiles" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <FilesToSign Include="$(IntermediateOutputPath)Merq.Vsix.dll">
+        <Authenticode>Microsoft400</Authenticode>
+      </FilesToSign>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CopyNuGetFilesToOutputDir" BeforeTargets="SignVsix" AfterTargets="CreateVsixContainer" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <NupkgFiles Include="$(PackageOutputPath)\Merq.*.nupkg" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(NupkgFiles)"
+      DestinationFolder="$(OutDir)"
+    />
+  </Target>
+
+  <Target Name="SignVsix" BeforeTargets="SignFiles" DependsOnTargets="GetFilesToSign;CreateVsixContainer;CopyNuGetFilesToOutputDir" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <FilesToSign Include="$(OutDir)$(TargetVsixContainerName)">
+        <Authenticode>VsixSHA2</Authenticode>
+      </FilesToSign>
+      <FilesToSign Include="$(OutDir)Merq.*.nupkg">
+        <Authenticode>NuGet</Authenticode>
+      </FilesToSign>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CopySignedNuGetFilesToPackageDir" AfterTargets="SignFiles" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <SignedFiles Include="$(OutDir)*.nupkg" />
+      <SignedFiles Include="$(OutDir)$(TargetVsixContainerName)" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(SignedFiles)"
+      DestinationFolder="$(PackageOutputPath)"
+    />
+  </Target>
+
   <ItemGroup>
     <EmbeddedResource Update="MerqPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
@@ -98,7 +163,7 @@
   </ItemGroup>
 
   <Import Project="Merq.Vsix.targets" />
-  
+
   <PropertyGroup>
     <StartAction>Program</StartAction>
     <StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>

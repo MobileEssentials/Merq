@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <PackageReference Include="IFluentInterface" Version="2.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.VisualStudioEng.MicroBuild.Core" Version="1.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="MSBuilder.ThisAssembly.Project" Version="0.3.3" PrivateAssets="all" />
   </ItemGroup>
 
@@ -27,6 +31,9 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Merq.Core.Tests" />
+    <FilesToSign Include="$(OutDir)\Merq.dll">
+        <Authenticode>Microsoft400</Authenticode>
+    </FilesToSign>
   </ItemGroup>
 
 </Project>
